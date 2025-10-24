@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}My Contacts{% endblock %}
+{% block content %}
+<div class="level">
+  <div class="level-left">
+    <h1 class="title">Your Contacts</h1>
+  </div>
+  <div class="level-right">
+    <a class="button is-primary" href="{% url 'contact-create' %}">Add Contact</a>
+  </div>
+</div>
+{% if contacts %}
+<table class="table is-fullwidth is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contact in contacts %}
+    <tr>
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.email|default:'—' }}</td>
+      <td>{{ contact.phone|default:'—' }}</td>
+      <td>{{ contact.address|default:'—' }}</td>
+      <td class="has-text-right">
+        <a class="button is-small" href="{% url 'contact-edit' contact.pk %}">Edit</a>
+        <a class="button is-danger is-small" href="{% url 'contact-delete' contact.pk %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="notification is-light">
+  You do not have any contacts yet. Add your first contact to get started.
+</div>
+{% endif %}
+{% endblock %}

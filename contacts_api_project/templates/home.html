@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block title %}Welcome | Contacts App{% endblock %}
+{% block content %}
+<div class="columns is-centered">
+  <div class="column is-half has-text-centered">
+    <h1 class="title">Welcome to the Contacts App</h1>
+    <p class="subtitle">Manage your personal address book securely.</p>
+    {% if user.is_authenticated %}
+    <a class="button is-primary is-medium" href="{% url 'contact-list' %}"
+      >View Your Contacts</a
+    >
+    {% else %}
+    <div class="buttons is-centered">
+      <a class="button is-primary" href="{% url 'register' %}"
+        >Create an Account</a
+      >
+      <a class="button is-light" href="{% url 'login' %}">Log In</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
